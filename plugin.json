@@ -1,0 +1,10 @@
+{
+    "main":"index.html",
+    "logo":"img/logo.png",
+    "features":[
+        {
+            "code":"jtfy",
+            "cmds":["jtfy","fy","jt"]
+        }
+    ]
+}
