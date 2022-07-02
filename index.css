@@ -1,0 +1,100 @@
+@font-face {
+    font-family: "oppo-sans";
+    src: url("font/OPPOSans-L.ttf");
+}
+
+*{
+    margin: 0;
+    border: none;
+    text-align: unset;
+    font-family: "oppo-sans";
+    color: #9e9e9e;
+}
+
+title{
+    width: 0;
+    height: 0;
+}
+
+body{
+    background-color: #13ae67;
+}
+
+.main{
+    position: relative;
+}
+
+.box{
+    /* 截图展示 */
+    position: relative;
+    width: 271px;
+    height: 201px;
+    padding: 15px 15px;
+    margin: 20px 10px 20px 26px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+    display: block;
+}
+
+.title{
+    position: absolute;
+    right:27px;
+    bottom: 14px;
+}
+
+.result{
+    /* 容器 2 */
+
+    position: absolute;
+    left: 357px;
+    top: 41px;
+    width: 343px;
+    height: 285px;
+    padding: 10px 10px 10px 44px; 
+    border-radius: 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.buttons{
+    position: absolute;
+    right: 40px;
+    bottom: 5px;
+}
+
+.link{
+    margin: 10px  ;
+}
+
+.button{
+    background-color: #13ae67;
+    background-repeat: no-repeat;
+    background-position: bottom 8px right 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 40PX;
+    position: absolute;
+    right:20px;
+    bottom: 20px;
+    display: block;
+}
+
+#chn{
+    width:270px;
+    height:190px;
+    display: block;
+}
+
+#topIcon{
+    position: absolute;
+    right: 22px;
+    top: 8px;
+}
+
+#poem{
+    color: #FFFFFF;
+    position: absolute;
+    right:200px;
+    width: 200px;
+}
