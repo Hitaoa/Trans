@@ -6,19 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css" type="text/css">
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="index.js"></script>
+    <script src="preload.js"></script>
+    <script src="crypto-js.min.js"></script>
 </head>
 <body>
     <div class="main">
         <div class="image box">
-            <img src="img/logo.png" width="270px" height="190px">
+            <img src="img/logo.png" width="270px" height="190px" id="image">
             <h6 class="title">图片</h6>
         </div>
         <div class="chn box">
-            <input id="chn" >
+            <textarea id="chn"></textarea>
             <button class="button" id="go" style="background-image:url('img/right.svg');"></button>
         </div>
         <div class="result">
-            <input id="result">
+            <textarea id="result"></textarea>
             <button class="button" id="copy" style="background-image:url('img/copy.svg');"></button>
         </div>
         <div class="buttons">

@@ -11,6 +11,11 @@
     color: #9e9e9e;
 }
 
+input{
+    color: #000;
+    text-align: left;
+}
+
 title{
     width: 0;
     height: 0;
@@ -77,6 +82,12 @@ body{
     position: absolute;
     right:20px;
     bottom: 20px;
+    display: block;
+}
+
+#result{
+    width: 340px;
+    height: 280px;
     display: block;
 }
 

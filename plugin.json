@@ -1,10 +1,20 @@
 {
     "main":"index.html",
+    "preload":"preload.js",
     "logo":"img/logo.png",
     "features":[
         {
             "code":"jtfy",
             "cmds":["截图","截图翻译","翻译"]
+        },
+        {
+            "code":"tpfy",
+            "cmds":[
+                {
+                    "type":"img",
+                    "label":"图片翻译"
+                }
+            ]
         }
     ]
 }
