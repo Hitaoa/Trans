@@ -7,7 +7,18 @@ $(function(){
     });
 
     $("#go").click(function () { 
-        window.trans($("#result").text())
+        var transText = $("#input").val()
+        if(transText != window.lastText){
+            console.log(transText)
+            window.trans(transText)
+        }else{
+            console.warn("That's the same")
+        }
+
+    });
+    
+    $("#copy").click(function () { 
+        navigator.clipboard.writeText($("#result").val())
     });
 
     window.sOCR = function(image){
