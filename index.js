@@ -1,5 +1,5 @@
-const appID='26382bf7be581c59'
-const appSe='URt8jRFog5p2Ga2Kpp32GG2fQSwKVSvv'
+var appID;//='26382bf7be581c59'
+var appSe;//='URt8jRFog5p2Ga2Kpp32GG2fQSwKVSvv'
 
 $(function(){
     $("#getScreen").click(function () { 
@@ -19,6 +19,16 @@ $(function(){
     
     $("#copy").click(function () { 
         navigator.clipboard.writeText($("#result").val())
+    });
+
+    $("#settings").click(function () { 
+        $(".setting").show()
+    });
+
+    $("#setCon").click(function () { 
+        $(".setting").hide()
+        utoolsDBput("appid",$("#appID").val())
+        utoolsDBput("appsec",$("#appSec").val())
     });
 
     window.sOCR = function(image){
@@ -151,4 +161,9 @@ function encode(str){
     }
     console.log(res)
     return res
+}
+
+function appInit(){
+    appID = utoolsDBget("appid")
+    appSe = utoolsDBget("appsec")
 }
