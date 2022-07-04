@@ -1,13 +1,13 @@
-@font-face {
+/* @font-face {
     font-family: "oppo-sans";
     src: url("../font/OPPOSans-R.ttf");
-}
+} */
 
 *{
     margin: 0;
     border: none;
     text-align: unset;
-    font: 1em "oppo-sans";
+    font: 1em;
     color: #9e9e9e;
 }
 
