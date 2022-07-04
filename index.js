@@ -31,7 +31,7 @@ $(function(){
                 else{
                     console.error(errorCode)
                 }
-                $("#chn").text(resText)
+                $("#input").text(resText)
                 window.lastText = resText
             },
             error:function(){
@@ -67,7 +67,6 @@ $(function(){
 });
 
 function getOcrData(image){
-    // while(pluginIn == false){}
     console.log(image)
     uuid = guid()
     time=parseInt(new Date().getTime()/1000)
