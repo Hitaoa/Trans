@@ -1,10 +1,14 @@
-var ima = '';
+var con = false
 utools.onPluginEnter(({code,type,payload})=>{
     console.log('user in.')
+    screenCapture()
 })     
 
-utools.screenCapture(base64Str => {
-    console.log(base64Str)
-    document.getElementById("image").src=base64Str;
-    ima=base64Str;
-})
+function screenCapture(){
+    utools.screenCapture(base64Str => {
+        console.log(base64Str)
+        document.getElementById("image").src=base64Str;
+        window.sOCR(base64Str)
+        window.trans(window.lastText)
+    })
+}

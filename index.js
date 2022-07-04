@@ -1,32 +1,81 @@
-var appID='26382bf7be581c59'
-var appSe='URt8jRFog5p2Ga2Kpp32GG2fQSwKVSvv'
+const appID='26382bf7be581c59'
+const appSe='URt8jRFog5p2Ga2Kpp32GG2fQSwKVSvv'
+
 $(function(){
+    $("#getScreen").click(function () { 
+        screenCapture()               
+    });
+
     $("#go").click(function () { 
+        window.trans($("#result").text())
+    });
+
+    window.sOCR = function(image){
         $.ajax({
             type: "post",
             url: "https://openapi.youdao.com/ocrapi",
-            data: encode(objTotext(getData(ima))),
+            data: objTotext(getOcrData(image)),
+            async:false,
             success: function (response) {
-                console.log(response)
+                var resText='';
+                if(response['errorCode'] == 0){
+                    console.log("ocr")
+                    var res = response['Result']["regions"]
+                    for(var i = 0;i<res.length;i++){
+                        lines=res[i.toString()]["lines"]
+                        for(var j=0;j<lines.length;j++){
+                            resText+=lines[j.toString()]["text"]+"\n"
+                        }
+                    }  
+                }
+                else{
+                    console.error(errorCode)
+                }
+                $("#chn").text(resText)
+                window.lastText = resText
+            },
+            error:function(){
+                console.error('ERROR')
             }
         });
-    });
-  
+    }
+
+    window.trans = function (text){
+        console.log("trans")
+        $.ajax({
+            type: "post",
+            url: "https://openapi.youdao.com/api",
+            data: objTotext(getTransData(text)),
+            async:false,
+            success: function (response) {
+                var resText='';
+                if(response['errorCode'] == 0){
+                    console.log("ocr")
+                    var res = response['translation']
+                    for(var i = 0;i<res.length;i++){
+                        resText+=res[i.toString()]+"\n"
+                    }  
+                }
+                else{
+                    console.error(errorCode)
+                    resText = "发生了错误，错误码为"+errorCode
+                }
+                $("#result").text(resText)
+            }
+        });
+    }
 });
 
-function getData(image){
+function getOcrData(image){
+    // while(pluginIn == false){}
+    console.log(image)
     uuid = guid()
     time=parseInt(new Date().getTime()/1000)
-    console.log(uuid)
     image = image.substring(22,image.length)
     input = image.substring(0,10)+image.length+image.substring(image.length-10,image.length)
-    console.log(appID+input+uuid+time+appSe)
     sign = CryptoJS.SHA256(appID+input+uuid+time+appSe).toString()
-    console.log(sign)
-    console.log(time+','+input+','+sign)
-    console.log(image)
     mes = {
-        img:image,
+        img:encode(image),
         langType:"auto",
         detectType:"10012",
         imageType:"1",
@@ -37,14 +86,32 @@ function getData(image){
         signType:"v3",
         curtime:time.toString()
     }
+    console.log(mes)
     return mes
 }
 
-function ocr(image){
-    console.log("1234567890")
-    mes = getData(image)
-    res = post("https://openapi.youdao.com/ocrapi",mes)
-    console.log(res)
+function getTransData(text){
+    console.log(text)
+    uuid = guid()
+    time=parseInt(new Date().getTime()/1000)
+    if(text.length <= 20){
+        input = text
+    }else{
+        input = text.substring(0,10)+text.length+text.substring(text.length-10,text.length)
+    }   
+    sign = CryptoJS.SHA256(appID+input+uuid+time+appSe).toString()
+    mes = {
+        q:encode(text),
+        from:"auto",
+        to:"auto",
+        appKey:appID,
+        salt:uuid,
+        sign:sign,
+        signType:"v3",
+        curtime:time.toString()
+    }
+    console.log(mes)
+    return mes
 }
 
 function guid() {
@@ -54,47 +121,24 @@ function guid() {
         return v.toString(16);
     });
 }
-function post(url,arr){
-     // 发送ajax
-    // （1） 获取 XMLHttpRequest对象
-    xmlHttp = new XMLHttpRequest();
-    console.log("array ",arr)
-     //  (2) 连接服务器
-    //  post
-    xmlHttp.open("post",url);
-    // 设置请求头的Content-Type
-    xmlHttp.setRequestHeader("Content-Type","x-www-form-urlencoded");
-    //xmlHttp.setRequestHeader("X-CSRFToken",ele_csrf.value);
-    // （3） 发送数据
-    console.log("array",arr)
-    wsend = objTotext(arr)
-    console.log(wsend)
-    xmlHttp.send(wsend);   // 请求体数据
-    // （4） 回调函数  success
-    text = 0;
-    xmlHttp.onreadystatechange = function() {
-        if(this.status==200){
-            console.log("responseText",this.responseText)
-            text=this.responseText
-        }
-    };   
-    return text;
-}
 
 function objTotext(obj){
-    var result = ''
+    var res = ''
     for (var key in obj) {
-        result = result+key+"="+obj[key]+"&"
+        var res = res+key+"="+obj[key]+"&"
     }
-    return result.substring(0,result.length-1);
+    console.log("1",res)
+    return res.substring(0,res.length-1);
 }
 
 function encode(str){
-    var had = ["","!","#","$","%","+",'@',":","=",'?']
-    var give = ["%20","%21","%23","%24","%25","%2B","%40","%3A","%3D","%3F"]
-    res = str
+    var had = ["%"," ","!","#","$","+",'@',":","=",'?']
+    var give = ["%25","%20","%21","%23","%24","%2B","%40","%3A","%3D","%3F"]
+    var res = str
+    console.log(res)
     for(var i=0;i<had.length;i++){
-        res = res.replace(had[i],give[i])
+        res = res.replaceAll(had[i],give[i])
     }
-    return result
+    console.log(res)
+    return res
 }
