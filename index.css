@@ -42,12 +42,6 @@ body{
     display: block;
 }
 
-.title{
-    position: absolute;
-    left:27px;
-    bottom: 14px;
-}
-
 .result{
     /* 容器 2 */
 
@@ -86,12 +80,14 @@ body{
 }
 
 #result{
-    width: 340px;
+    width: 364px;
     height: 280px;
+    position: absolute;
+    left: 14px;
     display: block;
 }
 
-#chn{
+#input{
     width:270px;
     height:190px;
     display: block;

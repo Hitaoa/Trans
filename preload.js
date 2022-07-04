@@ -1,7 +1,7 @@
 var con = false
 utools.onPluginEnter(({code,type,payload})=>{
     console.log('user in.')
-    screenCapture()
+    // screenCapture()
 })     
 
 function screenCapture(){
