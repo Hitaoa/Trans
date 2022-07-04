@@ -22,7 +22,7 @@ $(function(){
     });
 
     $("#settings").click(function () { 
-        $(".setting").show()
+        $(".setting").toggle()
     });
 
     $("#setCon").click(function () { 
