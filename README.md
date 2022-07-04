@@ -1,7 +1,7 @@
 # 截图翻译
 
 就一个普普通通的utools插件
-注：代码里的appID和appSec无效，请自行在!["有道开放平台"](https://ai.youdao.com/)申请！
+注：代码里的appID和appSec无效，请自行在[有道开放平台](https://ai.youdao.com/)申请！
 
 作者：Hitao
 
@@ -15,7 +15,7 @@
 
 ### 截图翻译
 
-![uTools_1656930211505.png](attachment:2cdc80f52d3bb731b7f96f30fbb62658)
+![展示](img/show.png)
 
 utools-“截图”“翻译”两个关键词，截图，右框即为所求。
 
