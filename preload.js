@@ -2,8 +2,14 @@ var con = false
 utools.onPluginEnter(({code,type,payload})=>{
     console.log('user in.')
     appInit()
-    screenCapture()
-
+    switch(code){
+        case "jtfy":screenCapture();break;
+        case "tpfy":{
+            document.getElementById("image").src=payload;
+            window.sOCR(payload)
+            window.trans(window.lastText)
+        }break;
+    }
 })     
 
 function screenCapture(){
