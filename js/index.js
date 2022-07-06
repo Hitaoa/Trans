@@ -1,5 +1,5 @@
-var appID;//='26382bf7be581c59'
-var appSe;//='URt8jRFog5p2Ga2Kpp32GG2fQSwKVSvv'
+var appID ='';//='26382bf7be581c59'
+var appSe ='';//='URt8jRFog5p2Ga2Kpp32GG2fQSwKVSvv'
 
 $(function(){
     $("#getScreen").click(function () { 
@@ -27,8 +27,10 @@ $(function(){
 
     $("#setCon").click(function () { 
         $(".setting").hide()
-        utoolsDBput("appid",$("#appID").val())
-        utoolsDBput("appsec",$("#appSec").val())
+        appID = $("#appID").val()
+        appSe = $("#appSec").val()
+        utoolsDBput("appid",appID)
+        utoolsDBput("appsec",appSe)
     });
 
     window.sOCR = function(image){
@@ -39,7 +41,12 @@ $(function(){
             async:false,
             success: function (response) {
                 var resText='';
-                if(response['errorCode'] == 0){
+                try {
+                    ec = response["errorCode"]
+                } catch{
+                    $("result").text("appID,appSec配置错误！请配置后重新加载插件重试！")
+                }
+                if(ec == 0){
                     console.log("ocr")
                     var res = response['Result']["regions"]
                     for(var i = 0;i<res.length;i++){
@@ -50,7 +57,8 @@ $(function(){
                     }  
                 }
                 else{
-                    console.error(errorCode)
+                    console.error(ec)
+                    $("result").text("appID,appSec配置错误！请配置后重新加载插件重试！")
                 }
                 $("#input").text(resText)
                 window.lastText = resText
@@ -70,7 +78,13 @@ $(function(){
             async:false,
             success: function (response) {
                 var resText='';
-                if(response['errorCode'] == 0){
+                try {
+                    ec = response["errorCode"]
+                } catch{
+                    resText = "appID,appSec配置错误！请配置后重新加载插件重试！"
+                    return
+                }
+                if(ec == 0){
                     console.log("ocr")
                     var res = response['translation']
                     for(var i = 0;i<res.length;i++){
@@ -78,8 +92,8 @@ $(function(){
                     }  
                 }
                 else{
-                    console.error(errorCode)
-                    resText = "发生了错误，错误码为"+errorCode
+                    console.error(ec)
+                    resText = "发生了错误，错误码为"+ec
                 }
                 $("#result").text(resText)
             }
