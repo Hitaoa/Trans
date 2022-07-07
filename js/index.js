@@ -33,6 +33,10 @@ $(function(){
         utoolsDBput("appsec",appSe)
     });
 
+    $("#doc").click(function () { 
+        openDocument()
+    });
+
     window.sOCR = function(image){
         $.ajax({
             type: "post",
