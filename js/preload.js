@@ -1,4 +1,6 @@
+const crypto = require('fs')
 var con = false
+//插件加载
 utools.onPluginEnter(({code,type,payload})=>{
     console.log('user in.')
     appInit()
@@ -28,3 +30,18 @@ function utoolsDBput(key,value){
 function utoolsDBget(key){
     return utools.dbStorage.getItem(key)
 }
+
+
+/**
+ * sha256 签名算法
+ * @param {String} finalStr - 需要签名的字符串
+ */
+function sha256(str){
+    let hash = crypto.createHmac('sha256')
+        .update(str)
+        .digest('base64'); 
+    return hash;
+}
+
+
+

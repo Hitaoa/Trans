@@ -1,5 +1,4 @@
-var appID ='';//='26382bf7be581c59'
-var appSe ='';//='URt8jRFog5p2Ga2Kpp32GG2fQSwKVSvv'
+
 
 $(function(){
     $("#getScreen").click(function () { 
@@ -111,7 +110,7 @@ function getOcrData(image){
     time=parseInt(new Date().getTime()/1000)
     image = image.substring(22,image.length)
     input = image.substring(0,10)+image.length+image.substring(image.length-10,image.length)
-    sign = CryptoJS.SHA256(appID+input+uuid+time+appSe).toString()
+    sign = sha256(appID+input+uuid+time+appSe).toString()
     mes = {
         img:encode(image),
         langType:"auto",
@@ -137,7 +136,7 @@ function getTransData(text){
     }else{
         input = text.substring(0,10)+text.length+text.substring(text.length-10,text.length)
     }   
-    sign = CryptoJS.SHA256(appID+input+uuid+time+appSe).toString()
+    sign = sha256(appID+input+uuid+time+appSe).toString()
     mes = {
         q:encode(text),
         from:"auto",
