@@ -60,7 +60,8 @@ $(function(){
                     console.error(ec)
                     $("result").text("appID,appSec配置错误！请配置后重新加载插件重试！")
                 }
-                $("#input").text(resText)
+                // $(".input").find("textarea").each(function(){$(this).text($(this).val());});
+                $("#input").val(resText)
                 window.lastText = resText
             },
             error:function(){
@@ -95,7 +96,7 @@ $(function(){
                     console.error(ec)
                     resText = "发生了错误，错误码为"+ec
                 }
-                $("#result").text(resText)
+                $("#result").val(resText)
             }
         });
     }
