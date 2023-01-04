@@ -1,13 +1,8 @@
-/* @font-face {
-    font-family: "oppo-sans";
-    src: url("../font/OPPOSans-R.ttf");
-} */
-
 *{
     margin: 0;
     border: none;
     text-align: unset;
-    font: 1em;
+    font: 1em "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
     color: #9e9e9e;
 }
 
