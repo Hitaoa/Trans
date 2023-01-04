@@ -1,8 +1,9 @@
-
+appID ='44581899d351c37b'
+appSe ='ysRuKfm5zNkrgsTxwrU0aeA0jqfP1ETI'
 
 $(function(){
     $("#getScreen").click(function () { 
-        screenCapture()               
+        window.u.screenCapture()               
     });
 
     $("#go").click(function () { 
@@ -28,12 +29,8 @@ $(function(){
         $(".setting").hide()
         appID = $("#appID").val()
         appSe = $("#appSec").val()
-        utoolsDBput("appid",appID)
-        utoolsDBput("appsec",appSe)
-    });
-
-    $("#doc").click(function () { 
-        openDocument()
+        window.u.DBput("appid",appID)
+        window.u.DBput("appsec",appSe)
     });
 
     window.sOCR = function(image){
@@ -110,7 +107,7 @@ function getOcrData(image){
     time=parseInt(new Date().getTime()/1000)
     image = image.substring(22,image.length)
     input = image.substring(0,10)+image.length+image.substring(image.length-10,image.length)
-    sign = sha256(appID+input+uuid+time+appSe).toString()
+    sign = window.u.sha256(appID+input+uuid+time+appSe).toString()
     mes = {
         img:encode(image),
         langType:"auto",
@@ -136,7 +133,7 @@ function getTransData(text){
     }else{
         input = text.substring(0,10)+text.length+text.substring(text.length-10,text.length)
     }   
-    sign = sha256(appID+input+uuid+time+appSe).toString()
+    sign = window.u.sha256(appID+input+uuid+time+appSe).toString()
     mes = {
         q:encode(text),
         from:"auto",
@@ -151,13 +148,7 @@ function getTransData(text){
     return mes
 }
 
-function guid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0,
-            v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
+
 
 function objTotext(obj){
     var res = ''
@@ -180,7 +171,15 @@ function encode(str){
     return res
 }
 
-function appInit(){
-    appID = utoolsDBget("appid")
-    appSe = utoolsDBget("appsec")
+function guid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0,
+            v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
+window.appInit=function(){
+    appID = window.u.DBget("appid")
+    appSe = window.u.DBget("appsec")
 }
