@@ -6,8 +6,10 @@ window.u = {
         utools.screenCapture(base64Str => {
             console.log(base64Str)
             document.getElementById("image").src=base64Str;
-            window.sOCR(base64Str)
-            window.trans(window.lastText)
+            if(window.sOCR(base64Str)){
+                window.trans(window.lastText)
+            }
+            
         })
     },
     DBget:function(key){
