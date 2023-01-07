@@ -74,6 +74,12 @@ body{
     display: block;
 }
 
+.audio{
+    position: absolute;
+    left: 110px;
+    bottom: 5px;
+}
+
 #restart{
     right: 70px;
 }

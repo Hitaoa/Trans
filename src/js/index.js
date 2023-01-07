@@ -1,7 +1,10 @@
-appID = "44581899d351c37b"
-appSe = "ysRuKfm5zNkrgsTxwrU0aeA0jqfP1ETI"
-from = "auto"
-to = "auto"
+var appID = "44581899d351c37b"
+var appSe = "ysRuKfm5zNkrgsTxwrU0aeA0jqfP1ETI"
+var from = "auto"
+var to = "auto"
+var speakURL=""
+var tSpeakURL=""
+
 
 $(function(){
     for(let key in languages){
@@ -10,6 +13,17 @@ $(function(){
         $("#froms").append("<option value='"+key+"'>"+languages[key]+"</option>");
         $("#tos").append("<option value='"+key+"'>"+languages[key]+"</option>");
     }
+
+    $(".audio").click(function () { 
+        u = $(this).attr("url")
+        console.log(u)
+        try{
+            new Audio(u).play()
+        }catch(e){
+            $("#result").val(e+TIPS.NOVOICE_ERROR);
+        }
+    });
+
     $("#from").change(function () { 
         from = $("#from").val();
     });
@@ -111,12 +125,14 @@ $(function(){
                 var resText="";
                 ec = response["errorCode"]
                 if(ec == 0){
-                    // console.log("ocr")
+                    console.log(response)
                     var res = response["translation"]
                     for(var i = 0;i<res.length;i++){
                         resText+=res[i.toString()]+"\n"
                     }  
                     $("#result").val(resText)
+                    $("#fromA").attr("url",response["speakUrl"]);
+                    $("#toA").attr("url",response["tSpeakUrl"]);                    
                 }
                 else{
                     console.log(ec)
@@ -180,8 +196,6 @@ function getTransData(text){
     // console.log(mes)
     return mes
 }
-
-
 
 function objTotext(obj){
     var res = ""
