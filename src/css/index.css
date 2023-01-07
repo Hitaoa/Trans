@@ -126,3 +126,12 @@ body{
     right:200px;
     width: 200px;
 }
+
+/* 语种选择 */
+select{
+    width:100px;
+    height:20px;
+    position:absolute;
+    left:20px;
+    bottom: 20px;
+}
