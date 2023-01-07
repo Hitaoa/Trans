@@ -1,5 +1,7 @@
 appID = "44581899d351c37b"
 appSe = "ysRuKfm5zNkrgsTxwrU0aeA0jqfP1ETI"
+from = "auto"
+to = "auto"
 let TIPS={
     APPID_ERROR:"APPID配置异常,请先在右下角的设置中参照文档说明申请并填写appid",
     APP_ERROR:"请确认是否在有道控制台开通相关业务",
@@ -11,14 +13,20 @@ let TIPS={
 }
 
 $(function(){
+    $("#from").change(function () { 
+        from = $("#from").val();
+    });
+    $("#to").change(function () { 
+        from = $("#to").val();
+    });
+
     $("#getScreen").click(function () { 
-        window.u.screenCapture()               
+        s = window.u.screenCapture()
+        window.OCRTrans(s)               
     });
 
     $("#restart").click(function () { 
-        if(window.sOCR(window.u.image)){
-            window.trans(window.lastText)
-        }
+        window.OCRTrans(window.u.image)
     });
 
     $("#go").click(function () { 
@@ -111,10 +119,17 @@ $(function(){
             }
         });
     }
+
+    window.OCRTrans = function(image){
+        if(window.sOCR(image)){
+            window.trans(window.lastText)
+        }
+    }
 });
 
+
 function getOcrData(image){
-    console.log(image)
+    // console.log(image)
     uuid = guid()
     time=parseInt(new Date().getTime()/1000)
     image = image.substring(22,image.length)
@@ -122,7 +137,7 @@ function getOcrData(image){
     sign = window.u.sha256(appID+input+uuid+time+appSe).toString()
     mes = {
         img:encode(image),
-        langType:"auto",
+        langType:from,
         detectType:"10012",
         imageType:"1",
         appKey:appID,
@@ -148,8 +163,8 @@ function getTransData(text){
     sign = window.u.sha256(appID+input+uuid+time+appSe).toString()
     mes = {
         q:encode(text),
-        from:"auto",
-        to:"auto",
+        from:from,
+        to:to,
         appKey:appID,
         salt:uuid,
         sign:sign,

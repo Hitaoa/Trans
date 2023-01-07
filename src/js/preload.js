@@ -1,5 +1,4 @@
 const crypto = require('crypto')
-var con = false
 
 window.u = {
     image:"",
@@ -7,11 +6,8 @@ window.u = {
         utools.screenCapture(base64Str => {
             console.log(base64Str)
             document.getElementById("image").src=base64Str;
-            this.image = base64Str
-            if(window.sOCR(base64Str)){
-                window.trans(window.lastText)
-            }
-            
+            this.image = base64Str           
+            return base64Str
         })
     },
     DBget:function(key){
@@ -34,11 +30,14 @@ utools.onPluginEnter(({code,type,payload})=>{
     console.log('user in.')
     window.appInit()
     switch(code){
-        case "jtfy":window.u.screenCapture();break;
+        case "jtfy":{
+            i = window.u.screenCapture();
+            window.OCRTrans(i)
+        }break;
         case "tpfy":{
-            document.getElementById("image").src=payload;
-            window.sOCR(payload)
-            window.trans(window.lastText)
+            document.getElementById("image").src=payload
+            window.u.image=payload
+            window.OCRTrans(payload)
         }break;
     }
 })     
