@@ -224,15 +224,16 @@ function error(place,ec){
 }
 
 window.appInit=function(){
-    if (appID!=""&appSe!=""){
-        return
-    }
-    appID = window.u.DBget("appid")
-    appSe = window.u.DBget("appsec")
-    f = window.u.DBput("from",from)
-    t = window.u.DBput("to",to)
-    if(f!=""||t!=""){
+    if (appID==""&appSe==""){
+        appID = window.u.DBget("appid")
+        appSe = window.u.DBget("appsec")
+    } 
+    f = window.u.DBget("from",from)
+    t = window.u.DBget("to",to)
+    if(f!=undefined||t!=undefined){
         from=f
         to=t
+        $("#from").val(f);
+        $("#to").val(t);
     }
 }
