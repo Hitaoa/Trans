@@ -22,6 +22,9 @@ window.u = {
             .digest('hex');
         console.log(hash)
         return hash;
+    },
+    openURL:function(url){
+        utools.shellOpenExternal(url)
     }
 }
 
