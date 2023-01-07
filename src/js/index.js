@@ -45,6 +45,10 @@ $(function(){
 
     $("#settings").click(function () { 
         $(".setting").toggle()
+        $("#appID").val(appID)
+        $("#appSec").val(appSe)
+        $("#froms").val(from);
+        $("#tos").val(to);
     });
 
     $("#setCon").click(function () { 
@@ -228,8 +232,8 @@ window.appInit=function(){
         appID = window.u.DBget("appid")
         appSe = window.u.DBget("appsec")
     } 
-    f = window.u.DBget("from",from)
-    t = window.u.DBget("to",to)
+    var f = window.u.DBget("from",from)
+    var t = window.u.DBget("to",to)
     if(f!=undefined||t!=undefined){
         from=f
         to=t
