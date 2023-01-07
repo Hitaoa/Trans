@@ -15,8 +15,7 @@ $(function(){
     }
 
     $(".audio").click(function () { 
-        u = $(this).attr("url")
-        console.log(u)
+        var u = $(this).attr("url")
         try{
             new Audio(u).play()
         }catch(e){
@@ -28,7 +27,7 @@ $(function(){
         from = $("#from").val();
     });
     $("#to").change(function () { 
-        from = $("#to").val();
+        to = $("#to").val();
     });
 
     $("#getScreen").click(function () { 
@@ -42,12 +41,8 @@ $(function(){
     $("#go").click(function () { 
         var transText = $("#input").val()
         if(transText != window.lastText){
-            console.log(transText)
             window.trans(transText)
-        }else{
-            console.warn("That's the same")
         }
-
     });
     
     $("#copy").click(function () { 
@@ -115,7 +110,6 @@ $(function(){
     }
 
     window.trans = function (text){
-        console.log("trans")
         $.ajax({
             type: "post",
             url: "https://openapi.youdao.com/api",
@@ -151,13 +145,12 @@ $(function(){
 
 
 function getOcrData(image){
-    // console.log(image)
-    uuid = guid()
-    time=parseInt(new Date().getTime()/1000)
-    image = image.substring(22,image.length)
-    input = image.substring(0,10)+image.length+image.substring(image.length-10,image.length)
-    sign = window.u.sha256(appID+input+uuid+time+appSe).toString()
-    mes = {
+    var uuid = guid()
+    var time=parseInt(new Date().getTime()/1000)
+    var image = image.substring(22,image.length)
+    var input = image.substring(0,10)+image.length+image.substring(image.length-10,image.length)
+    var sign = window.u.sha256(appID+input+uuid+time+appSe).toString()
+    var mes = {
         img:encode(image),
         langType:from,
         detectType:"10012",
@@ -174,16 +167,16 @@ function getOcrData(image){
 }
 
 function getTransData(text){
-    console.log(text)
-    uuid = guid()
-    time=parseInt(new Date().getTime()/1000)
+    var uuid = guid()
+    var time=parseInt(new Date().getTime()/1000)
+    var input=""
     if(text.length <= 20){
         input = text
     }else{
         input = text.substring(0,10)+text.length+text.substring(text.length-10,text.length)
     }   
-    sign = window.u.sha256(appID+input+uuid+time+appSe).toString()
-    mes = {
+    var sign = window.u.sha256(appID+input+uuid+time+appSe).toString()
+    var mes = {
         q:encode(text),
         from:from,
         to:to,
@@ -193,7 +186,6 @@ function getTransData(text){
         signType:"v3",
         curtime:time.toString()
     }
-    // console.log(mes)
     return mes
 }
 
@@ -210,11 +202,9 @@ function encode(str){
     var had = ["%"," ","!","#","$","+","@",":","=","?"]
     var give = ["%25","%20","%21","%23","%24","%2B","%40","%3A","%3D","%3F"]
     var res = str
-    console.log(res)
     for(var i=0;i<had.length;i++){
         res = res.replaceAll(had[i],give[i])
     }
-    // console.log(res)
     return res
 }
 
