@@ -6,8 +6,8 @@ window.u = {
         utools.screenCapture(base64Str => {
             console.log(base64Str)
             document.getElementById("image").src=base64Str;
-            this.image = base64Str           
-            return base64Str
+            this.image = base64Str
+            window.OCRTrans(base64Str)           
         })
     },
     DBget:function(key){
@@ -34,8 +34,7 @@ utools.onPluginEnter(({code,type,payload})=>{
     window.appInit()
     switch(code){
         case "jtfy":{
-            i = window.u.screenCapture();
-            window.OCRTrans(i)
+            window.u.screenCapture();
         }break;
         case "tpfy":{
             document.getElementById("image").src=payload

@@ -21,8 +21,7 @@ $(function(){
     });
 
     $("#getScreen").click(function () { 
-        s = window.u.screenCapture()
-        window.OCRTrans(s)               
+        window.u.screenCapture()              
     });
 
     $("#restart").click(function () { 
@@ -52,8 +51,12 @@ $(function(){
         $(".setting").hide()
         appID = $("#appID").val()
         appSe = $("#appSec").val()
+        from = $("#froms").val();
+        to = $("#tos").val();
         window.u.DBput("appid",appID)
         window.u.DBput("appsec",appSe)
+        window.u.DBput("from",from)
+        window.u.DBput("to",to)
     });
 
     window.sOCR = function(image){
@@ -71,11 +74,9 @@ $(function(){
                     for(var i = 0;i<res.length;i++){
                         lines=res[i.toString()]["lines"]
                         for(var j=0;j<lines.length;j++){
-                            resText+=lines[j.toString()]["text"]+"\n"
-                            
+                            resText+=lines[j.toString()]["text"]+"\n"                 
                         }                       
                     }  
-
                 }
                 else{
                     console.error(ec)
@@ -228,4 +229,10 @@ window.appInit=function(){
     }
     appID = window.u.DBget("appid")
     appSe = window.u.DBget("appsec")
+    f = window.u.DBput("from",from)
+    t = window.u.DBput("to",to)
+    if(f!=""||t!=""){
+        from=f
+        to=t
+    }
 }
