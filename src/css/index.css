@@ -74,6 +74,10 @@ body{
     display: block;
 }
 
+#restart{
+    right: 70px;
+}
+
 .setting{
     position: absolute;
     bottom:15px;

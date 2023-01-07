@@ -15,6 +15,12 @@ $(function(){
         window.u.screenCapture()               
     });
 
+    $("#restart").click(function () { 
+        if(window.sOCR(window.u.image)){
+            window.trans(window.lastText)
+        }
+    });
+
     $("#go").click(function () { 
         var transText = $("#input").val()
         if(transText != window.lastText){

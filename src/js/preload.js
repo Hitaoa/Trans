@@ -2,10 +2,12 @@ const crypto = require('crypto')
 var con = false
 
 window.u = {
+    image:"",
     screenCapture:function(){
         utools.screenCapture(base64Str => {
             console.log(base64Str)
             document.getElementById("image").src=base64Str;
+            this.image = base64Str
             if(window.sOCR(base64Str)){
                 window.trans(window.lastText)
             }
