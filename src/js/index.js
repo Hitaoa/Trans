@@ -78,6 +78,10 @@ $(function(){
                             resText+=lines[j.toString()]["text"]+"\n"                 
                         }                       
                     }  
+                    if(res==""){
+                        $("#input").val(TIPS.NOTEXT_ERROR)
+                        return 1
+                    }
                 }
                 else{
                     console.error(ec)

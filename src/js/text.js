@@ -5,7 +5,8 @@ let TIPS={
     NonERROR_ERROR:"错误码：{ec}，请参照文档提交bug至issue或是邮件至dev@100721.xyz",
     OCR_PLACE:"OCR发生了错误:",
     TRANS_PLACE:"翻译发生了错误:",
-    NOMONEY_ERROR:"有道账户欠费停机，请在有道开发者平台充值"
+    NOMONEY_ERROR:"有道账户欠费停机，请在有道开发者平台充值",
+	NOTEXT_ERROR:"OCR识别为空！"
 }
 let languages={
     "auto": "自动识别",
