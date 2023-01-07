@@ -1,10 +1,13 @@
-appID ="44581899d351c37b"
-appSe ="ysRuKfm5zNkrgsTxwrU0aeA0jqfP1ETI"
-error_code = 0
+appID = "44581899d351c37b"
+appSe = "ysRuKfm5zNkrgsTxwrU0aeA0jqfP1ETI"
 let TIPS={
-    APPID_ERROR:"请先在右下角的设置中参照文档说明申请并填写appid,本程序依赖它们工作！若已经配置，请检查它们是否配置OCR服务！",
-    INTERNET_ERROR:"网络问题导致请求错误，请重试！",
-    NonERROR_ERROR:"错误码：{ec}，请参照文档提交bug至issue或是邮件至dev@100721.xyz"
+    APPID_ERROR:"APPID配置异常,请先在右下角的设置中参照文档说明申请并填写appid",
+    APP_ERROR:"请确认是否在有道控制台开通相关业务",
+    INTERNET_ERROR:"请检查网络连接是否正常",
+    NonERROR_ERROR:"错误码：{ec}，请参照文档提交bug至issue或是邮件至dev@100721.xyz",
+    OCR_PLACE:"OCR发生了错误:",
+    TRANS_PLACE:"翻译发生了错误:",
+    NOMONEY_ERROR:"有道账户欠费停机，请在有道开发者平台充值"
 }
 
 $(function(){
@@ -62,11 +65,7 @@ $(function(){
                 }
                 else{
                     console.error(ec)
-                    if(ec==113){
-                        $("#result").val(TIPS.APPID_ERROR)
-                    }else{
-                        $("#result").val(TIPS.NonERROR_ERROR.replace("{ec}",ec))
-                    }
+                    error(TIPS.TRANS_PLACE,ec)
                     return 0
                 }
                 // $(".input").find("textarea").each(function(){$(this).text($(this).val());});
@@ -100,12 +99,8 @@ $(function(){
                     $("#result").val(resText)
                 }
                 else{
-                    console.error(ec)
-                    if(ec==113){
-                        $("#result").val(TIPS.APPID_ERROR)
-                    }else{
-                        $("#result").val(TIPS.NonERROR_ERROR.replace("{ec}",ec))
-                    }
+                    console.log(ec)
+                    error(TIPS.TRANS_PLACE,ec)
                 }
             }
         });
@@ -188,6 +183,22 @@ function guid() {
             v = c == "x" ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
+}
+function error(place,ec){
+    ec=parseInt(ec)
+    switch(ec){
+        case 108:
+            $("#result").val(place+TIPS.APPID_ERROR)//错误码108，APPID配置问题
+            break
+        case 110:
+            $("#result").val(place+TIPS.APP_ERROR)//错误码110，应用开通问题
+            break
+        case 401:
+            $("#result").val(place+TIPS.NOMONEY_ERROR)//错误码401，账户欠费问题
+            break
+        default:
+            $("#result").val(place+TIPS.NonERROR_ERROR.replace("{ec}",ec))
+    }
 }
 
 window.appInit=function(){
