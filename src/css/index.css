@@ -139,3 +139,7 @@ select{
     left:20px;
     bottom: 20px;
 }
+
+.setting>select{
+    position:unset;
+}

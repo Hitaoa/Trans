@@ -2,17 +2,14 @@ appID = "44581899d351c37b"
 appSe = "ysRuKfm5zNkrgsTxwrU0aeA0jqfP1ETI"
 from = "auto"
 to = "auto"
-let TIPS={
-    APPID_ERROR:"APPID配置异常,请先在右下角的设置中参照文档说明申请并填写appid",
-    APP_ERROR:"请确认是否在有道控制台开通相关业务",
-    INTERNET_ERROR:"请检查网络连接是否正常",
-    NonERROR_ERROR:"错误码：{ec}，请参照文档提交bug至issue或是邮件至dev@100721.xyz",
-    OCR_PLACE:"OCR发生了错误:",
-    TRANS_PLACE:"翻译发生了错误:",
-    NOMONEY_ERROR:"有道账户欠费停机，请在有道开发者平台充值"
-}
 
 $(function(){
+    for(let key in languages){
+        $("#from").append("<option value='"+key+"'>"+languages[key]+"</option>");
+        $("#to").append("<option value='"+key+"'>"+languages[key]+"</option>");
+        $("#froms").append("<option value='"+key+"'>"+languages[key]+"</option>");
+        $("#tos").append("<option value='"+key+"'>"+languages[key]+"</option>");
+    }
     $("#from").change(function () { 
         from = $("#from").val();
     });
