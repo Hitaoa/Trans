@@ -1,46 +1,26 @@
 # 截图翻译
+>一截，一翻，so easy 
 
-就一个普普通通的utools插件
-注：代码里的appID和appSec无效，请自行在[有道开放平台](https://ai.youdao.com/)申请！
+![界面展示](docimg/界面展示.png)
+这是一款utools插件，需要基于[utools](https://u.tools)使用。
 
-作者：Hitao
+## 功能介绍
+* 截图翻译
+* 图片翻译
+* TTS文本朗读
+## 快速开始
+由于本插件基于有道提供的API运行 ~~(其实是有道APIGUI版本)~~,在正式使用之前，您需要先配置有道提供的API。
 
-## 下载
+至于如何配置，我们更推荐您阅读[「划词翻译」]("https://hcfy.app/docs/services/youdao-api")提供的教程
 
-会在插件商店发，github同步更新upx(包括测试版）
+在完成配置后，您可以找到如下界面
+![应用信息](docimg/应用信息.png)
 
-## 初始化
-本应用不附带appid，请自行注册申请。
-1.在[有道开放平台](https://ai.youdao.com/)注册一个账号
-2.登录控制台，在[应用总览](https://ai.youdao.com/console/#/app-overview)创建一个应用，应用名称随意，服务包括自然语言翻译服务下的文本翻译，光学字符识别服务下的通用文字识别，接入方式为api,
-应用类别选择效率办公
-![创建应用](img/capp.png)
-3.在[应用总览](https://ai.youdao.com/console/#/app-overview)中，找到你创建的应用，复制应用id和密钥
-4.打开插件，点击右下设置，分别在appID填入应用id,appSec中填入密钥
-5.可以开始使用了
+按下`Alt`+`Space`,调出utools输入框，输入关键词`jt`，在进入截图界面时右键，进入主界面
 
-## 错误
-使用过程中，若发现如图示的错误，请在[翻译错误](https://ai.youdao.com/DOCSIRMA/html/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E7%BF%BB%E8%AF%91/API%E6%96%87%E6%A1%A3/%E6%96%87%E6%9C%AC%E7%BF%BB%E8%AF%91%E6%9C%8D%E5%8A%A1/%E6%96%87%E6%9C%AC%E7%BF%BB%E8%AF%91%E6%9C%8D%E5%8A%A1-API%E6%96%87%E6%A1%A3.html#section-11)和[OCR错误](https://ai.youdao.com/DOCSIRMA/html/%E6%96%87%E5%AD%97%E8%AF%86%E5%88%ABOCR/API%E6%96%87%E6%A1%A3/%E9%80%9A%E7%94%A8%E6%96%87%E5%AD%97%E8%AF%86%E5%88%AB%E6%9C%8D%E5%8A%A1/%E9%80%9A%E7%94%A8%E6%96%87%E5%AD%97%E8%AF%86%E5%88%AB%E6%9C%8D%E5%8A%A1-API%E6%96%87%E6%A1%A3.html#section-10)中对照，有问题可以发issue或发邮件至2175176366@qq.com
-![错误](img/jtfy2.png)
-
-## 功能
-
-### 截图翻译
-
-![展示](img/show.png)
-
-utools-“截图”“翻译”两个关键词，截图，右框即为所求。
-
-### 图片翻译
-
-utools选择图片-选择翻译
-
-<br/>
-
-## 小目标
-
-- [x] 截图并翻译
-- [x] 图片翻译
-- [ ] 可更换api平台
-- [ ] 下方诗句每日更换
-- [ ] 加入一键百度搜索功能
+## 其它配置
+## 错误汇总
+## Next
+## 开源使用
+## 开源协议
+Apache Licence 2.0
