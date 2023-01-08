@@ -5,7 +5,6 @@ var to = "auto"
 var speakURL=""
 var tSpeakURL=""
 
-
 $(function(){
     for(let key in languages){
         $("#from").append("<option value='"+key+"'>"+languages[key]+"</option>");
