@@ -1,4 +1,6 @@
 const crypto = require('crypto')
+const { exec } = require('child_process');
+const iconv = require('iconv-lite');
 
 window.u = {
     image:"",
@@ -25,6 +27,9 @@ window.u = {
     },
     openURL:function(url){
         utools.shellOpenExternal(url)
+    },
+    textSpeak(text,speed){
+        exec(`powershell.exe Add-Type -AssemblyName System.speech; $speak = New-Object System.Speech.Synthesis.SpeechSynthesizer; $speak.Rate =${speed}; $speak.Speak([Console]::In.ReadLine()); exit`).stdin.end(iconv.encode(text, 'gbk'));
     }
 }
 

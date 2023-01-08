@@ -15,12 +15,14 @@ $(function(){
     }
 
     $(".audio").click(function () { 
-        var u = $(this).attr("url")
-        try{
-            new Audio(u).play()
-        }catch(e){
-            $("#result").val(e+TIPS.NOVOICE_ERROR);
-        }
+        // var u = $(this).attr("url")
+        // try{
+        //     new Audio(u).play()
+        // }catch(e){
+        //     $("#result").val(e+TIPS.NOVOICE_ERROR);
+        // }
+        console.log($(this).parent().children("textarea").val())
+        window.u.textSpeak($(this).parent().children("textarea").val(),4)
     });
 
     $("#from").change(function () { 
