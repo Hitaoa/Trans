@@ -2,8 +2,7 @@ var appID = "44581899d351c37b"
 var appSe = "ysRuKfm5zNkrgsTxwrU0aeA0jqfP1ETI"
 var from = "auto"
 var to = "auto"
-var speakURL=""
-var tSpeakURL=""
+var ttsPlat = "ttsN"//默认不提供tts服务
 
 $(function(){
     for(let key in languages){
@@ -14,14 +13,13 @@ $(function(){
     }
 
     $(".audio").click(function () { 
-        // var u = $(this).attr("url")
-        // try{
-        //     new Audio(u).play()
-        // }catch(e){
-        //     $("#result").val(e+TIPS.NOVOICE_ERROR);
-        // }
-        console.log($(this).parent().children("textarea").val())
-        window.u.textSpeak($(this).parent().children("textarea").val(),4)
+        if(ttsPlat=="ttsY"){
+            var u = $(this).attr("url")
+            new Audio(u).play()
+        }else{
+            console.log($(this).parent().children("textarea").val())
+            window.u.textSpeak($(this).parent().children("textarea").val(),4)
+        }
     });
 
     $("#from").change(function () { 
@@ -51,11 +49,15 @@ $(function(){
     });
 
     $("#settings").click(function () { 
-        $(".setting").toggle()
+        if(!window.u.isWindows()){
+            $("#ttsW").attr("disabled", "disabled");
+        } 
         $("#appID").val(appID)
         $("#appSec").val(appSe)
         $("#froms").val(from);
         $("#tos").val(to);
+        $(`#${ttsPlat}`).attr("checked", "checked");
+        $(".setting").toggle()
     });
 
     $("#setCon").click(function () { 
@@ -64,10 +66,17 @@ $(function(){
         appSe = $("#appSec").val()
         from = $("#froms").val();
         to = $("#tos").val();
+        ttsPlat=$("input[type='radio']:checked").attr("id")
+        if(ttsPlat=="ttsN"){
+            $(".audio").hide();
+        }else{
+            $(".audio").show();
+        }
         window.u.DBput("appid",appID)
         window.u.DBput("appsec",appSe)
         window.u.DBput("from",from)
         window.u.DBput("to",to)
+        window.u.DBput("ttsPlat",ttsPlat)
     });
 
     window.sOCR = function(image){
@@ -238,12 +247,20 @@ window.appInit=function(){
         appID = window.u.DBget("appid")
         appSe = window.u.DBget("appsec")
     } 
-    var f = window.u.DBget("from",from)
-    var t = window.u.DBget("to",to)
+    var f = window.u.DBget("from")
+    var t = window.u.DBget("to")
     if(f!=undefined||t!=undefined){
         from=f
         to=t
         $("#from").val(f);
         $("#to").val(t);
+    }
+    t=window.u.DBget("ttsPlat")
+    if(t!=undefined){
+        ttsPlat=t
+        
+    }
+    if(ttsPlat=="ttsN"){
+        $(".audio").hide();
     }
 }

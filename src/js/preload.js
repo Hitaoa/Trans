@@ -1,9 +1,11 @@
 const crypto = require('crypto')
 const { exec } = require('child_process');
-// const iconv = require('iconv-lite');
 
 window.u = {
     image:"",
+    isWindows:function(){
+        return utools.isWindows()
+    },
     screenCapture:function(){
         utools.screenCapture(base64Str => {
             console.log(base64Str)
